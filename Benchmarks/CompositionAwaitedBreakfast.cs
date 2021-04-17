@@ -57,8 +57,13 @@ namespace AsyncAwaitTutorial.Benchmarks
                 Console.WriteLine("Putting a slice of bread in the toaster");
             }
             Console.WriteLine("Start toasting...");
+            await Task.Delay(2000);
 
-            await Task.Delay(3000);
+            // Exception Handling
+            //Console.WriteLine("Fire! Toast is ruined!");
+            //throw new InvalidOperationException("The toaster is on fire");
+
+            await Task.Delay(1000);
             Console.WriteLine("Remove toast from toaster");
 
             return new Toast();
