@@ -28,11 +28,16 @@ namespace AsyncAwaitTutorial
             //AwaitedBreakfast awaitedBreakfast = new AwaitedBreakfast();
             //awaitedBreakfast.MakeBreakfast().Wait();
 
-            ConcurrentAwaitedBreakfast concurrentAwaitedBreakfast = new ConcurrentAwaitedBreakfast();
-            concurrentAwaitedBreakfast.MakeBreakfast().Wait();
+            //ConcurrentAwaitedBreakfast concurrentAwaitedBreakfast = new ConcurrentAwaitedBreakfast();
+            //concurrentAwaitedBreakfast.MakeBreakfast().Wait();
+
+            CompositionAwaitedBreakfast compositionAwaitedBreakfast = new CompositionAwaitedBreakfast();
+            compositionAwaitedBreakfast.MakeBreakfast().Wait();
 #else
             BenchmarkRunner.Run<SimpleBreakfast>();
             BenchmarkRunner.Run<AwaitedBreakfast>();
+            BenchmarkRunner.Run<ConcurrentAwaitedBreakfast>();
+            BenchmarkRunner.Run<ConcurrentAwaitedBreakfast>();
 #endif
         }
     }
