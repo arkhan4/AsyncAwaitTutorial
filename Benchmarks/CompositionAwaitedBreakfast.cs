@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using AsyncAwaitTutorial.Models;
 using BenchmarkDotNet.Attributes;
@@ -19,14 +20,25 @@ namespace AsyncAwaitTutorial.Benchmarks
             Task<Bacon> baconTask = FryBaconAsync(3);
             Task<Toast> toastTask = MakeToastWithButterAndJamAsync(2);
 
-            Egg eggs = await eggsTask;
-            Console.WriteLine("eggs are ready");
+            List<Task> breakfastTasks = new List<Task>() { eggsTask, baconTask, toastTask };
+            while (breakfastTasks.Count > 0)
+            {
+                Task finishedTask = await Task.WhenAny(breakfastTasks);
+                if (finishedTask == eggsTask)
+                {
+                    Console.WriteLine("eggs are ready");
+                }
+                else if (finishedTask == baconTask)
+                {
+                    Console.WriteLine("bacon is ready");
+                }
+                else if (finishedTask == toastTask)
+                {
+                    Console.WriteLine("toast is ready");
+                }
 
-            Bacon bacon = await baconTask;
-            Console.WriteLine("bacon is ready");
-
-            Toast toast = await toastTask;
-            Console.WriteLine("toast is ready");
+                breakfastTasks.Remove(finishedTask);
+            }
 
             Juice oj = PourOJ();
             Console.WriteLine("oj is ready");
