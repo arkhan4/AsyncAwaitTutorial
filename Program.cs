@@ -25,10 +25,11 @@ namespace AsyncAwaitTutorial
             //SimpleBreakfast simpleBreakfast = new SimpleBreakfast();
             //simpleBreakfast.MakeBreakfast();
 
-            AwaitedBreakfast awaitedBreakfast = new AwaitedBreakfast();
-            System.Threading.Tasks.Task task = awaitedBreakfast.MakeBreakfast();
+            //AwaitedBreakfast awaitedBreakfast = new AwaitedBreakfast();
+            //awaitedBreakfast.MakeBreakfast().Wait();
 
-            task.Wait();
+            ConcurrentAwaitedBreakfast concurrentAwaitedBreakfast = new ConcurrentAwaitedBreakfast();
+            concurrentAwaitedBreakfast.MakeBreakfast().Wait();
 #else
             BenchmarkRunner.Run<SimpleBreakfast>();
             BenchmarkRunner.Run<AwaitedBreakfast>();
